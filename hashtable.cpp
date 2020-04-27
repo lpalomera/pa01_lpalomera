@@ -61,7 +61,22 @@ void Hashtable::hashInsert(std::string word){
     return;
 
     }
-   
+
+void Hashtable::hashInsert2(std::string word){
+    int index=hash(word);
+    for(size_t i=0;i<table[index].size();i++){
+        if(word==table[index][i].first){
+            table[index][i].second=table[index][i].second+1;
+            return;
+        }
+    }
+    table[index].push_back(make_pair(word,1));
+    return;
+    }
+
+
+
+
 //delete
 void Hashtable::hashDelete(std::string word){
     int index=hash(word);
@@ -85,7 +100,7 @@ void Hashtable::hashDelete(std::string word){
     }
    
 //range search
-void Hashtable::HashRangeSearch(std::string begin, std::string end){
+void Hashtable::hashRangeSearch(std::string begin, std::string end){
     vector<pair<string,int> > sortedVec;
     for(size_t i=0; i<CAPACITY;i++){
         for(size_t j=0; j< table[i].size();j++)

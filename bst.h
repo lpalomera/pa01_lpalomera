@@ -20,11 +20,14 @@ public:
     //insert
     void bstInsert(std::string name);     // insert value; return false if duplicate
     
+    //insert(no cout)
+    void bstInsert2(std::string name);
+
     //search (contains)
     void bstSearch(std::string name) const;
 
     //delete
-    void remove(std::string name);
+    void bstDelete(std::string name);
     
     //void bstRangeSearch();
     void bstRangeSearch(string begin, string end);
@@ -51,7 +54,9 @@ struct Node {
     Node* getNodeFor(string name, Node* n) const; // IMPLEMENT THIS FIRST: returns the node for a given value or NULL if none exists
     void clear(Node *n); // for destructor
     void insert(string name, Node *n); // note overloading names for simplicity
-    
+   
+    void insert2(string name, Node *n);
+
     void printInOrder(Node *n) const;
     void printRangeSearch(Node* n,  string begin, string end) const;
     

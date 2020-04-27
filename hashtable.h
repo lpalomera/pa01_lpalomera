@@ -24,6 +24,9 @@ public:
    //search
    void hashSearch(std::string word);
    
+   //insert (no output)
+   void hashInsert2(std::string word);
+
    //insert
    void hashInsert(std::string word);
    
@@ -31,7 +34,7 @@ public:
    void hashDelete(std::string word);
    
    //range search
-   void HashRangeSearch(std::string begin, std::string end);
+   void hashRangeSearch(std::string begin, std::string end);
 
 private:
    const static size_t CAPACITY = 100;

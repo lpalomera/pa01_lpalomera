@@ -73,6 +73,47 @@ void BST::insert(string name, Node *n) {
 }
 
 
+void BST::bstInsert2(string name){
+    // handle special case of empty tree first
+    if (!root) {
+	root = new Node(name);
+	root->word.second=root->word.second+1;
+    return;
+    }
+    // otherwise use recursive helper
+    return insert2(name, root);
+}
+
+
+void BST::insert2(string name, Node *n){
+    if (name == n->word.first){
+	n->word.second=n->word.second+1;
+    return;
+    }
+    //return false;
+    if (name.compare(n->word.first)<0) {
+	if (n->left)
+	    return insert2(name, n->left);
+	else {
+        n->left = new Node(name);
+	    n->left->parent = n;
+	    n->left->word.second=n->left->word.second+1;
+        return;
+        //return true;
+	}
+    }
+    else {
+	if (n->right)
+	    return insert2(name, n->right);
+	else {
+	    n->right = new Node(name);
+	    n->right->parent = n;
+        n->right->word.second=n->right->word.second+1;
+        return;
+        //return true;
+        }
+    }
+}
 
 // print tree data in-order, with helper
 void BST::printInOrder() const {
@@ -218,7 +259,7 @@ string BST::getSuccessor(string name) const{
 
 // deletes the Node containing the given value from the tree
 // returns true if the node exist and was deleted or false if the node does not exist
-void BST::remove(string name){
+void BST::bstDelete(string name){
    Node *p1 = getNodeFor(name,root);
    if(p1->word.second !=1){
        p1->word.second=p1->word.second-1;
@@ -299,7 +340,7 @@ void BST::remove(string name){
                                                         else {
                                                             Node *p3 = getSuccessorNode(name);
                                                             string temp = p3->word.first;
-                                                            remove(temp);
+                                                            bstDelete(temp);
                                                             p1->word.first = temp;
                                                             }
                                                             return;
