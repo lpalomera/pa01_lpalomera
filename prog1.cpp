@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
     ifstream myfile;
     ///autograder/submission/PA1_dataset.txt
     
-    myfile.open("/autograder/submission/PA1_dataset.txt");        //PA1_dataset.txt);
+    myfile.open("PA1_dataset.txt");        //PA1_dataset.txt);
     char output[100];
     int z=0; 
     if (myfile.is_open()) {
@@ -105,7 +105,7 @@ for (it; it != argument.end(); it++) {
                                                 //cout << commands[vecIt] << " ";
                                                 //cout << commands[vecIt+1] << endl;
                                                 h1.hashSearch(commands[vecIt + 1]);
-                                                 b1.bstSearch(commands[vecIt + 1]);
+                                                b1.bstSearch(commands[vecIt + 1]);
                                                 }
                                                 }
                                                 

@@ -313,14 +313,14 @@ void BST::bstDeleteHelp(Node* &root,string name){
 
 		else
 		{
-			Node* child = (root->left)? root->left: root->right;
+			
+            Node* child = (root->left)? root->left: root->right;
 			Node* curr = root;
-
 			root = child;
             if(root->word.second ==1)
-                cout<<root->word.first<<" deleted"<<endl;
-            else{
-			cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
+                cout<<curr->word.first<<" deleted"<<endl;
+            else if(root->word.second >=1){
+			cout<<curr->word.first<<" deleted, new count = "<<curr->word.second<<endl;
 			}
             delete curr;
 		}
