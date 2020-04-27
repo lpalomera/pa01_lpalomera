@@ -53,6 +53,7 @@ struct Node {
     void insert(string name, Node *n); // note overloading names for simplicity
     
     void printInOrder(Node *n) const;
+    void printRangeSearch(Node* n,  string begin, string end) const;
     
     //void printPreOrder(Node *n) const;
     //void printPostOrder(Node *n) const;

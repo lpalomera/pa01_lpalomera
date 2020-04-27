@@ -3,44 +3,91 @@
 #include <vector>
 #include "hashtable.h"
 #include "bst.h"
+#include <fstream>
+#include <sstream> 
+#include <string>
 using namespace std;
 
-int main(){
+int main(int argc, char *argv[]){
     BST b1;
-    b1.bstInsert("hello");
-    b1.bstInsert("alamony");
-    b1.bstInsert("pig");
-    b1.bstInsert("zebra");
-    b1.bstInsert("alamony");
-    b1.bstInsert("serenity");
-    b1.printInOrder();
-    cout<<"------------------------"<<endl;
-
-    b1.bstRangeSearch("h","t");
-
-    //b1.remove("alamony");
-    //cout<<b1.getPredecessor("hello")<<endl;
-    //cout<<b1.getSuccessor("zebra")<<endl;
-    cout<<"------------------------"<<endl;
-
-
-    //b1.printInOrder();
-    /*
     Hashtable h1;
-    h1.hashInsert("goodbye");
-    h1.hashInsert("hello");
-    h1.hashInsert("please");
-    h1.hashInsert("terra");
-    h1.hashInsert("animal");
-    h1.hashInsert("crossing");
-    h1.hashInsert("nominate");
-    h1.hashInsert("snoody");
-    h1.HashRangeSearch("g","ron");
-    */
+
+/*
+    string parseThis;
+    ifstream words(argv[1]); 
+    cout<<argv[1]<<endl;
+    words>>parseThis;
+    cout<<parseThis<<endl;
+    
+    cout<<"----------"<<endl;
+*/
+
+    ifstream myfile;
+    ///autograder/submission/PA1_dataset.txt
+    myfile.open("/autograder/submission/PA1_dataset.txt"); //PA1_dataset.txt");
+    char output[100];
+    int x=0; 
+    if (myfile.is_open()) {
+        while (!myfile.eof() && x<9999) {
+            x++;
+            myfile >> output;
+            h1.hashInsert(output);
+            b1.bstInsert(output);
+            }
+    }
+    myfile.close();
 
 
 
+string argument = argv[1] ;
+string::iterator it = argument.begin();
+string subword, sub;
+vector<string> commands;
+for (it; it != argument.end(); it++) {
+    if (subword.length() > 5)
+        sub = subword.substr(subword.length() - 4, 4);
+        if (subword == "search" || subword == "delete" || subword == "insert" || subword == "range search") {
+            commands.push_back(subword);
+            subword.clear();
+            }
+            else {
+                if(*it == ',') {
+                    commands.push_back(subword);
+                    subword.clear();
+                    it++;
+                    }
+                    else if (sub == " to ") {
+                        subword = subword.substr(0, subword.length() - 4);
+                        commands.push_back(subword);
+                        subword.clear();
+                        sub.clear();
+                        subword += *it;
+                        }
+                        else
+                            subword += *it;
+                            }
+             }
+                            commands.push_back(subword);
+                            for (int vecIt = 0; vecIt < commands.size(); vecIt++) {
+                                cout << commands[vecIt] << " ";
+                                if (commands[vecIt] == "range search") {
+                                    h1.HashRangeSearch(commands[vecIt + 1], commands[vecIt + 2]);
+                                    b1.bstRangeSearch(commands[vecIt + 1], commands[vecIt + 2] );
+                                    }
+                                    else if (commands[vecIt] == "delete") {
+                                        h1.hashDelete(commands[vecIt + 1]);
+                                        b1.remove(commands[vecIt + 1]);
+                                        }
+                                        else if (commands[vecIt] == "insert") {
+                                            h1.hashInsert(commands[vecIt + 1]);
+                                            b1.bstInsert(commands[vecIt + 1]);
+                                            }
+                                            else if (commands[vecIt] == "search") {
+                                                h1.hashSearch(commands[vecIt + 1]);
+                                                b1.bstSearch(commands[vecIt + 1]);
+                                                }
+                                                }
+                                                
 
-
-    return 0;
+return 0;
     }

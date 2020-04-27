@@ -30,10 +30,8 @@ void BST::bstInsert(string name) {
     if (!root) {
 	root = new Node(name);
 	root->word.second=root->word.second+1;
-    cout<<"insert "<< name<<endl;
-    cout<< root->word.first<< " inserted,count = "<<root->word.second<<endl;
+    cout<< root->word.first<< " inserted, count = "<<root->word.second<<endl;
     return;
-    //return true;
     }
     // otherwise use recursive helper
     return insert(name, root);
@@ -43,8 +41,8 @@ void BST::bstInsert(string name) {
 void BST::insert(string name, Node *n) {
     if (name == n->word.first){
 	n->word.second=n->word.second+1;
-    cout<<"insert "<< name<<endl;
-    cout<< n->word.first<< " inserted,count = "<<n->word.second<<endl;
+    //cout<<"insert "<< name<<endl;
+    cout<< n->word.first<< " inserted, new count = "<<n->word.second<<endl;
     return;
     }
     //return false;
@@ -55,8 +53,7 @@ void BST::insert(string name, Node *n) {
         n->left = new Node(name);
 	    n->left->parent = n;
 	    n->left->word.second=n->left->word.second+1;
-        cout<<"insert "<< name<<endl;
-        cout<< n->left->word.first<< " inserted,count = "<<n->left->word.second<<endl;
+        cout<< n->left->word.first<< " inserted, new count = "<<n->left->word.second<<endl;
         return;
         //return true;
 	}
@@ -68,11 +65,10 @@ void BST::insert(string name, Node *n) {
 	    n->right = new Node(name);
 	    n->right->parent = n;
         n->right->word.second=n->right->word.second+1;
-        cout<<"insert "<< name<<endl;
-        cout<< n->right->word.first<< " inserted,count = "<<n->right->word.second<<endl;
+        cout<< n->right->word.first<< " inserted, new count = "<<n->right->word.second<<endl;
         return;
         //return true;
-	}
+        }
     }
 }
 
@@ -90,17 +86,27 @@ void BST::printInOrder(Node *n) const {
     }
 }
 
+
+
 void BST::bstRangeSearch(string begin, string end){
-    Node* n= getNodeFor(begin,root);
-    if(n ){//&& (n->word.first).compare(end)>=0){
-        printInOrder(n->left);
-        cout << n->word.first <<endl;
-        printInOrder(n->right);
+    printRangeSearch(root, begin, end);
+    }
+
+void BST::printRangeSearch(Node* n, string begin, string end) const{
+    if(n==NULL){
+        return;}
+
+    if(n->word.first.compare(begin)>0){
+        printRangeSearch(n->left,begin,end);
+        }
+    if(n->word.first.compare(begin)>=0 && n->word.first.compare(end)<=0){
+        cout<<n->word.first<<endl;
+        }
+    if(n->word.first.compare(end)<0){
+        printRangeSearch(n->right,begin,end);
         }
 
     }
-
-
 
 BST::Node* BST::getNodeFor(string name, Node* n) const{
     if(n==NULL){return 0;}
@@ -120,7 +126,7 @@ BST::Node* BST::getNodeFor(string name, Node* n) const{
 void BST::bstSearch(string name) const {
     Node* p1=getNodeFor(name,root);
     if(p1){
-        cout<<p1->word.first<<endl;
+        cout<<p1->word.first<<" found, count = "<<p1->word.second<<endl;
         return;
         //return true;
         }
@@ -216,7 +222,7 @@ void BST::remove(string name){
    Node *p1 = getNodeFor(name,root);
    if(p1->word.second !=1){
        p1->word.second=p1->word.second-1;
-       cout<<"delete "<<p1->word.first<<endl;
+       //cout<<"delete "<<p1->word.first<<endl;
        cout<<p1->word.first<<" deleted, new count = "<<p1->word.second<<endl;
        return;
        }
