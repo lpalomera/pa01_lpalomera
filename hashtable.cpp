@@ -42,7 +42,7 @@ void Hashtable::hashSearch(std::string word){
         }
     }
     //table[index].push_back(make_pair(valWord,1));
-	cout<< word <<" not found "<< endl;
+	cout<< word <<" not found"<< endl;
     return;
     }
    
