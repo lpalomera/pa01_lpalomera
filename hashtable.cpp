@@ -31,12 +31,13 @@ size_t Hashtable::hash(std::string word) const {
 
 //search
 void Hashtable::hashSearch(std::string word){
+    int count=0;
     int index=hash(word);
     for(size_t i=0;i<table[index].size();i++){
         if(word==table[index][i].first){
-            //table[index][i].second=table[index][i].second+1;
-            //cout<< "Search " <<table[index][i].first<<endl;
-            cout<< table[index][i].first << " found,count = "<< table[index][i].second<<endl;
+            count=table[index][i].second;
+            cout<< word << " found, count = "<< count<<endl;
+            //cout<< table[index][i].first << " found,count = "<< table[index][i].second<<endl;
             return;
         }
     }
@@ -56,7 +57,7 @@ void Hashtable::hashInsert(std::string word){
             return;
         }
     }
-    cout<< word<< " inserted,new count = 1"<<endl;
+    cout<< word<< " inserted, new count = 1"<<endl;
     table[index].push_back(make_pair(word,1));
     return;
 
@@ -90,7 +91,8 @@ void Hashtable::hashDelete(std::string word){
             }
         else if(table[index][i].second==1){
             table[index].erase(table[index].begin()+(i));
-            cout<<table[index][i].first<<" deleted"<<endl;
+            cout<<word<<" deleted"<<endl;
+            //cout<<table[index][i].first<<" deleted"<<endl;
             return ;
             }
         }

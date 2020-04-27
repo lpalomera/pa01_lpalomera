@@ -172,7 +172,7 @@ void BST::bstSearch(string name) const {
         //return true;
         }
     else{
-        cout<<"Not found"<<endl;
+        cout<<name<<" not found"<<endl;
         return;
         //return false;
         }
@@ -257,9 +257,84 @@ string BST::getSuccessor(string name) const{
 }
 
 
+
+
 // deletes the Node containing the given value from the tree
 // returns true if the node exist and was deleted or false if the node does not exist
+
 void BST::bstDelete(string name){
+    bstDeleteHelp(root,name);
+    }
+
+
+
+
+
+void BST::bstDeleteHelp(Node* &root,string name){
+   //cout<<"This is what I am going to delete "<<name<<endl;
+
+	if (root == nullptr)
+		return;
+
+	if (name.compare(root->word.first)<0 )//fix
+		bstDeleteHelp(root->left, name);
+
+	else if (name.compare(root->word.first)>0)//fix
+		bstDeleteHelp(root->right, name);
+
+	// key found
+	else
+	{
+		if (root->left == nullptr && root->right == nullptr)
+		{
+			// deallocate the memory and update root to null
+			//cout<<root->word.first<<endl;
+            if(root->word.second ==1)
+                cout<<root->word.first<<" deleted"<<endl;
+            else{
+			cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
+			}
+            delete root;
+			root = nullptr;
+		}
+
+		else if (root->left && root->right)
+		{
+			Node *predecessor = getPredecessorNode(root->left->word.first);
+            if(root->word.second ==1)
+                cout<<root->word.first<<" deleted"<<endl;
+            else{
+			cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
+            }
+			root->word.first = predecessor->word.first;
+
+			bstDeleteHelp(root->left, predecessor->word.first);
+		}
+
+		else
+		{
+			Node* child = (root->left)? root->left: root->right;
+			Node* curr = root;
+
+			root = child;
+            if(root->word.second ==1)
+                cout<<root->word.first<<" deleted"<<endl;
+            else{
+			cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
+			}
+            delete curr;
+		}
+	}
+}
+
+
+
+
+
+
+/*
+
+   
    Node *p1 = getNodeFor(name,root);
    if(p1->word.second !=1){
        p1->word.second=p1->word.second-1;
@@ -271,7 +346,10 @@ void BST::bstDelete(string name){
    if(p1) {
        Node *p2 = p1->parent; 
        bool R=false;
+       cout<<"This is parent "<<p2->word.first<<"and this should be child"<<p1->word.first<<endl;
        if(!p2){
+           
+       cout<<p1->word.first<<endl;
            R=true;} 
            bool b=false;
            if(!R){ 
@@ -280,7 +358,6 @@ void BST::bstDelete(string name){
                if(!(p1->left) && !(p1->right)){
                    if(R){
                        cout<<root->word.first<<" deleted"<<endl;
-                       //cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
                        delete root;
                        root = 0;
                        return;
@@ -292,6 +369,7 @@ void BST::bstDelete(string name){
                            else { 
                                p2->left = 0;
                                }
+                               cout<<p1->word.first<<endl;
                                cout<< p1->word.first<<" deleted"<<endl;
                                delete p1;
                                }
@@ -340,6 +418,7 @@ void BST::bstDelete(string name){
                                                         else {
                                                             Node *p3 = getSuccessorNode(name);
                                                             string temp = p3->word.first;
+                                                            //cout<<"I amd deleting this "<<temp<<endl;
                                                             bstDelete(temp);
                                                             p1->word.first = temp;
                                                             }
@@ -348,4 +427,4 @@ void BST::bstDelete(string name){
                                                             }
                                                             return;
                                                             //return false;               //check this
-                                                            } 
+                                                            }*/

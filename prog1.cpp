@@ -8,104 +8,6 @@
 #include <string>
 using namespace std;
 
-/*
-void parser(string x){
-	  string word="";
-      for (int i=0; i<x.size()-1; i++){
-	    if(x[i]==' '){
-	      
-	      
-	      if(word=="range"){          //case 4
-	        i=i+8;
-	        word="";
-	        for(int m=i; m<=x.size();m++){
-	          if( x[m]==' ' || m==x.size() ){
-	            //string first=word; 
-	            cout<<word<<endl;
-	            //
-	            i=m+4;
-	            word="";
-	            for(int y=i; y<=x.size(); y++){
-	              if( x[y]==',' || y==x.size() ){
-	                //string last=word;
-                    b1.bstRangeSearch(first,last);
-                    h1.hashRangeSearch(first,last);
-	                //cout<<word<<endl;
-	                i=y;
-	                word="";
-	                break;
-	                }else{word=word+x[y];}
-	              }
-	            
-	            //
-	            word="";
-	            break;
-	            }
-	          else{
-	            word=word+x[m];}
-	          }
-	      }
-	             
-	      
-	      if(word=="insert"){           //case 1
-	        word="";
-	        for(int j=i+1;j<=x.size();j++){
-	          if(x[j]==','|| j==x.size() ){
-	            //insert Functions go here
-                b1.bstInsert();
-                h1.hashInsert();
-	            //cout<<word<<endl;    
-	            i=j+1;
-	            word="";
-	            break;
-	            }
-	          else{
-	            word=word+x[j];}
-	          }
-	        }
-	      
-	      if(word=="delete"){        //case 2
-	        word="";
-	        for(int k=i+1; k<=x.size();k++){
-	          if(x[k]==',' || k==x.size()){
-	            //Delete functions go here
-	            b1.bstDelete(word);
-                h1.hashDelete(word);
-                //cout<<word<<endl;
-	            i=k+1;
-	                        word="";
-	            break;
-	            }
-	          else{
-	            word=word+x[k];}
-	          }
-	      }
-	      
-	      if(word=="search"){         //case 3
-	        word="";
-	        for(int n=i+1; n<=x.size();n++){
-	          if(x[n]==','|| n==x.size()){
-	             //Search functions go here
-                 b1.bstSearch(word);
-                 h1.hashInsert(word);
-	             //cout<<word<<endl;
-	             i=n+1;
-	             word="";
-	             break;
-	            }
-	          else{
-	            word=word+x[n];}
-	           }
-	      }
-	      
-	      
-	    
-	      //else{cout<<"how did you make it here"<<endl;}
-	    }
-	    else{word=word+x[i];}
-	  }
-}	
-*/
 
 int main(int argc, char *argv[]){
     BST b1;
@@ -123,7 +25,8 @@ int main(int argc, char *argv[]){
 
     ifstream myfile;
     ///autograder/submission/PA1_dataset.txt
-    myfile.open("/autograder/submission/PA1_dataset.txt"); //PA1_dataset.txt);
+    
+    myfile.open("PA1_dataset.txt");        //PA1_dataset.txt);
     char output[100];
     int z=0; 
     if (myfile.is_open()) {
@@ -135,12 +38,14 @@ int main(int argc, char *argv[]){
             }
     }
     myfile.close();
-    //b1.bstSearch("broadcasting");
-    //b1.bstInsert("computers");
-    //b1.hashDelete("broadcasting");
-    //b1.bstDelete("hospitalize");
-    //search broadcasting, insert computers, delete hospitalize
-  
+    /*h1.hashSearch("broadcasting");
+    h1.hashInsert("computers");
+    h1.hashDelete("hospitalize");
+    h1.hashInsert ("honour"); 
+    h1.hashSearch("hospitalize");
+    h1.hashDelete("broadcasting");
+    h1.hashDelete("broadcasting");
+*/
 
 
 
@@ -195,6 +100,7 @@ for (it; it != argument.end(); it++) {
                                                 }
                                                 }
                                                 
+
 
 return 0;
     }

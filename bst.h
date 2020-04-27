@@ -60,12 +60,9 @@ struct Node {
     void printInOrder(Node *n) const;
     void printRangeSearch(Node* n,  string begin, string end) const;
     
-    //void printPreOrder(Node *n) const;
-    //void printPostOrder(Node *n) const;
-    //int sum(Node *n) const;
-    //int count(Node *n) const;
+    void bstDeleteHelp(Node* &n,string name);
 
-    // these should be used by getPredecessor and getSuccessor, and ONE of them should be used by remove
+
     Node* getSuccessorNode(string value) const;   // returns the Node containing the successor of the given value
     Node* getPredecessorNode(string value) const; // returns the Node containing the predecessor of the given value i
 };
