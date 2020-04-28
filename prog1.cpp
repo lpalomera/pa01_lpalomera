@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
     ifstream myfile;
     ///autograder/submission/PA1_dataset.txt
     
-    myfile.open("/autograder/submission/PA1_dataset.txt");        //PA1_dataset.txt);
+    myfile.open("PA1_dataset.txt");        //PA1_dataset.txt);
     char output[100];
     int z=0; 
     if (myfile.is_open()) {
@@ -51,63 +51,53 @@ int main(int argc, char *argv[]){
 
 
 
-string argument = argv[1] ;
-string::iterator it = argument.begin();
-string subword, sub;
-vector<string> commands;
-for (it; it != argument.end(); it++) {
-    if (subword.length() > 5)
-        sub = subword.substr(subword.length() - 4, 4);
-        if (subword == "search" || subword == "delete" || subword == "insert" || subword == "range search") {
-            commands.push_back(subword);
-            subword.clear();
+string parse = argv[1] ;
+string::iterator it = parse.begin();
+string name, n;
+vector<string> dict;
+for (it; it != parse.end(); it++) {
+    if (name.length() > 5)
+        n = name.substr(name.length() - 4, 4);
+        if (name == "search" || name == "delete" || name == "insert" || name == "range search") {
+            dict.push_back(name);
+            name.clear();
             }
             else {
                 if(*it == ',') {
-                    commands.push_back(subword);
-                    subword.clear();
+                    dict.push_back(name);
+                    name.clear();
                     it++;
                     }
-                    else if (sub == " to ") {
-                        subword = subword.substr(0, subword.length() - 4);
-                        commands.push_back(subword);
-                        subword.clear();
-                        sub.clear();
-                        subword += *it;
+                    else if (n == " to ") {
+                        name = name.substr(0, name.length() - 4);
+                        dict.push_back(name);
+                        name.clear();
+                        n.clear();
+                        name += *it;
                         }
                         else
-                            subword += *it;
+                            name += *it;
                             }
              }
-                            commands.push_back(subword);
-                            for (int vecIt = 0; vecIt < commands.size(); vecIt++) {
-                               // cout << commands[vecIt] << " ";
-                                if (commands[vecIt] == "range search") {
-                                    //cout << commands[vecIt] << " ";
-                                    //cout<< commands[vecIt + 1]<<" to "<<commands[vecIt + 2]<<endl;
-                                    //cout << commands[vecIt+1] << endl;
-                                    h1.hashRangeSearch(commands[vecIt + 1], commands[vecIt + 2]);
-                                    b1.bstRangeSearch(commands[vecIt + 1], commands[vecIt + 2] );
+                            dict.push_back(name);
+                            for (int vecIt = 0; vecIt < dict.size(); vecIt++) {
+                                if (dict[vecIt] == "range search") {
+                                    //h1.hashRangeSearch(dict[vecIt + 1], dict[vecIt + 2]);
+                                    b1.bstRangeSearch(dict[vecIt + 1], dict[vecIt + 2] );
                                     }
-                                    else if (commands[vecIt] == "delete") {
-                                        //cout << commands[vecIt] << " ";
-                                        //cout << commands[vecIt+1] << endl;
-                                        h1.hashDelete(commands[vecIt + 1]);
-                                        b1.bstDelete(commands[vecIt + 1]);
+                                    else if (dict[vecIt] == "delete") {
+                                        //h1.hashDelete(dict[vecIt + 1]);
+                                        b1.bstDelete(dict[vecIt + 1]);
                                         }
-                                        else if (commands[vecIt] == "insert") {
-                                            //cout << commands[vecIt] << " ";
-                                            //cout << commands[vecIt+1] << endl;
-                                            h1.hashInsert(commands[vecIt + 1]);
-                                            b1.bstInsert(commands[vecIt + 1]);
+                                        else if (dict[vecIt] == "insert") {
+                                            //h1.hashInsert(dict[vecIt + 1]);
+                                            b1.bstInsert(dict[vecIt + 1]);
                                             }
-                                            else if (commands[vecIt] == "search") {
-                                                //cout << commands[vecIt] << " ";
-                                                //cout << commands[vecIt+1] << endl;
-                                                h1.hashSearch(commands[vecIt + 1]);
-                                                b1.bstSearch(commands[vecIt + 1]);
-                                                }
-                                                }
+                                            else if (dict[vecIt] == "search") {
+                                                //h1.hashSearch(dict[vecIt + 1]);
+                                                b1.bstSearch(dict[vecIt + 1]);
+                                            }
+                              }
                                                 
 
 

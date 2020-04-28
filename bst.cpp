@@ -277,23 +277,22 @@ void BST::bstDeleteHelp(Node* &root,string name){
 		return;
 
 	if (name.compare(root->word.first)<0 )//fix
-		bstDeleteHelp(root->left, name);
+		{bstDeleteHelp(root->left, name);}
 
 	else if (name.compare(root->word.first)>0)//fix
-		bstDeleteHelp(root->right, name);
+		{bstDeleteHelp(root->right, name);}
 
 	// key found
 	else
 	{
 		if (root->left == nullptr && root->right == nullptr)
 		{
-			// deallocate the memory and update root to null
-			//cout<<root->word.first<<endl;
             if(root->word.second ==1)
                 cout<<root->word.first<<" deleted"<<endl;
             else{
-			cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
-			}
+			cout<<root->word.first<<" deleted, new count = "<<(root->word.second)-1<<endl;
+			return;
+            }
             delete root;
 			root = nullptr;
 		}
@@ -306,8 +305,9 @@ void BST::bstDeleteHelp(Node* &root,string name){
             else{
 			cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
             }
-			root->word.first = predecessor->word.first;
-
+			
+            root->word.first = predecessor->word.first;
+            cout << root->word.first<<endl;
 			bstDeleteHelp(root->left, predecessor->word.first);
 		}
 
@@ -317,11 +317,14 @@ void BST::bstDeleteHelp(Node* &root,string name){
             Node* child = (root->left)? root->left: root->right;
 			Node* curr = root;
 			root = child;
-            if(root->word.second ==1)
+            cout<<curr->word.first<<endl;
+            if(root->word.second ==1){
                 cout<<curr->word.first<<" deleted"<<endl;
+            }
             else if(root->word.second >=1){
-			cout<<curr->word.first<<" deleted, new count = "<<curr->word.second<<endl;
-			}
+			cout<<curr->word.first<<" deleted, new count = "<<(curr->word.second)-1<<endl;
+			return;
+            }
             delete curr;
 		}
 	}
