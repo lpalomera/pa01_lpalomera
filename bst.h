@@ -60,7 +60,7 @@ struct Node {
     void printInOrder(Node *n) const;
     void printRangeSearch(Node* n,  string begin, string end) const;
     
-    void bstDeleteHelp(Node* &n,string name);
+    void bstDeleteHelp(Node* &n,string name, bool recur);
 
 
     Node* getSuccessorNode(string value) const;   // returns the Node containing the successor of the given value

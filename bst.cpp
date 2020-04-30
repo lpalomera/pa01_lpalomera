@@ -263,35 +263,42 @@ string BST::getSuccessor(string name) const{
 // returns true if the node exist and was deleted or false if the node does not exist
 
 void BST::bstDelete(string name){
-    bstDeleteHelp(root,name);
+    bstDeleteHelp(root,name,true);
     }
 
 
 
 
 
-void BST::bstDeleteHelp(Node* &root,string name){
+void BST::bstDeleteHelp(Node* &root,string name, bool recur){
+   
+
    //cout<<"This is what I am going to delete "<<name<<endl;
 
 	if (root == nullptr)
 		return;
 
 	if (name.compare(root->word.first)<0 )//fix
-		{bstDeleteHelp(root->left, name);}
+		{bstDeleteHelp(root->left, name, recur);}
 
 	else if (name.compare(root->word.first)>0)//fix
-		{bstDeleteHelp(root->right, name);}
+		{bstDeleteHelp(root->right, name, recur);}
 
 	// key found
-	else
+
+    else
 	{
 		if (root->left == nullptr && root->right == nullptr)
 		{
+            if(recur){
             if(root->word.second ==1)
                 cout<<root->word.first<<" deleted"<<endl;
-            else{
-			cout<<root->word.first<<" deleted, new count = "<<(root->word.second)-1<<endl;
+            else if(root->word.second >=1){
+            root->word.second= root->word.second-1;
+			cout<<"maybe prob"<<endl;
+            cout<<root->word.first<<" deleted, new count = "<<(root->word.second)<<endl;
 			return;
+            }
             }
             delete root;
 			root = nullptr;
@@ -299,32 +306,39 @@ void BST::bstDeleteHelp(Node* &root,string name){
 
 		else if (root->left && root->right)
 		{
-			Node *predecessor = getPredecessorNode(root->left->word.first);
+            Node *predecessor = getPredecessorNode(root->left->word.first);
+            if(recur){
             if(root->word.second ==1)
                 cout<<root->word.first<<" deleted"<<endl;
-            else{
-			cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
+            else if(root->word.second >=1){
+		    root->word.second= root->word.second-1;	
+            cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
+			return;}
             }
-			
             root->word.first = predecessor->word.first;
-            cout << root->word.first<<endl;
-			bstDeleteHelp(root->left, predecessor->word.first);
-		}
+            //cout << predecessor->word.first<<" is being run recursively"<<endl;
+			//cout<<"fffffffffffffffffff"<<root->left->word.first<<endl;
+            bstDeleteHelp(root->left, predecessor->word.first, false);
+        }
 
 		else
 		{
-			
             Node* child = (root->left)? root->left: root->right;
-			Node* curr = root;
-			root = child;
-            cout<<curr->word.first<<endl;
+            Node* curr = root;
+            if(recur){
             if(root->word.second ==1){
                 cout<<curr->word.first<<" deleted"<<endl;
             }
             else if(root->word.second >=1){
-			cout<<curr->word.first<<" deleted, new count = "<<(curr->word.second)-1<<endl;
+			root->word.second= root->word.second-1;
+            cout<<curr->word.first<<" deleted, new count = "<<(curr->word.second)<<endl;
 			return;
             }
+            }
+            //Node* child = (root->left)? root->left: root->right;
+            //Node* curr = root;
+			root = child;
+
             delete curr;
 		}
 	}
