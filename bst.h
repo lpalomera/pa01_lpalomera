@@ -18,7 +18,7 @@ public:
     ~BST();
     
     //insert
-    void bstInsert(std::string name);     // insert value; return false if duplicate
+    void bstInsert(std::string name); 
     
     //insert(no cout)
     void bstInsert2(std::string name);
@@ -51,9 +51,9 @@ struct Node {
 
     // recursive utility functions for use by public methods above
     
-    Node* getNodeFor(string name, Node* n) const; // IMPLEMENT THIS FIRST: returns the node for a given value or NULL if none exists
+    Node* getNodeFor(string name, Node* n) const; //returns the node for a given value or NULL if none exists
     void clear(Node *n); // for destructor
-    void insert(string name, Node *n); // note overloading names for simplicity
+    void insert(string name, Node *n);
    
     void insert2(string name, Node *n);
 

@@ -1,6 +1,4 @@
-
 // bst.cpp
-// Lorenzo Palomera 5/5/19
 
 #include "bst.h"
 
@@ -194,11 +192,11 @@ BST::Node* BST::getPredecessorNode(string name) const{
             }
             if(p1->left==NULL){
                 p2=p1->parent;
-                while(name.compare(p2->word.first)<0 ){ //fix rn
+                while(name.compare(p2->word.first)<0 ){
                     if(p2->parent==NULL){return p3;}
                     p2=p2->parent;}
                     return p2;}
-                    return NULL;; // REPLACE THIS NON-SOLUTION
+                    return NULL;; 
 }
 
 // returns the predecessor value of the given value or 0 if there is none
@@ -215,7 +213,7 @@ string BST::getPredecessor(string name) const{
            return i->word.first;
    }
    else
-   return ""; // REPLACE THIS NON-SOLUTION
+   return ""; 
 }
 
 // returns the Node containing the successor of the given value
@@ -236,7 +234,7 @@ BST::Node* BST::getSuccessorNode(string name) const{
             if(p2->parent==NULL){return p3;}
             p2=p2->parent;}
             return p2;}
-  return NULL;; // REPLACE THIS NON-SOLUTION
+  return NULL;;
 }
 
 // returns the successor value of the given value or 0 if there is none
@@ -253,38 +251,23 @@ string BST::getSuccessor(string name) const{
            return i->word.first;
    }
    else
-    return ""; // REPLACE THIS NON-SOLUTION
+    return "";
 }
-
-
-
-
-// deletes the Node containing the given value from the tree
-// returns true if the node exist and was deleted or false if the node does not exist
 
 void BST::bstDelete(string name){
     bstDeleteHelp(root,name,true);
     }
 
-
-
-
-
 void BST::bstDeleteHelp(Node* &root,string name, bool recur){
-   
-
-   //cout<<"This is what I am going to delete "<<name<<endl;
-
 	if (root == nullptr)
 		return;
 
-	if (name.compare(root->word.first)<0 )//fix
+	if (name.compare(root->word.first)<0 )
 		{bstDeleteHelp(root->left, name, recur);}
 
-	else if (name.compare(root->word.first)>0)//fix
+	else if (name.compare(root->word.first)>0)
 		{bstDeleteHelp(root->right, name, recur);}
 
-	// key found
 
     else
 	{
@@ -316,8 +299,6 @@ void BST::bstDeleteHelp(Node* &root,string name, bool recur){
 			return;}
             }
             root->word.first = predecessor->word.first;
-            //cout << predecessor->word.first<<" is being run recursively"<<endl;
-			//cout<<"fffffffffffffffffff"<<root->left->word.first<<endl;
             bstDeleteHelp(root->left, predecessor->word.first, false);
         }
 
@@ -347,101 +328,3 @@ void BST::bstDeleteHelp(Node* &root,string name, bool recur){
 
 
 
-
-
-/*
-
-   
-   Node *p1 = getNodeFor(name,root);
-   if(p1->word.second !=1){
-       p1->word.second=p1->word.second-1;
-       //cout<<"delete "<<p1->word.first<<endl;
-       cout<<p1->word.first<<" deleted, new count = "<<p1->word.second<<endl;
-       return;
-       }
-
-   if(p1) {
-       Node *p2 = p1->parent; 
-       bool R=false;
-       cout<<"This is parent "<<p2->word.first<<"and this should be child"<<p1->word.first<<endl;
-       if(!p2){
-           
-       cout<<p1->word.first<<endl;
-           R=true;} 
-           bool b=false;
-           if(!R){ 
-               b=( (p1->word.first).compare(p2->word.first) >0);//p1->info > p2->info);
-               }
-               if(!(p1->left) && !(p1->right)){
-                   if(R){
-                       cout<<root->word.first<<" deleted"<<endl;
-                       delete root;
-                       root = 0;
-                       return;
-                       //return true;
-                       }
-                       if(b){
-                           p2->right = 0;
-                           }
-                           else { 
-                               p2->left = 0;
-                               }
-                               cout<<p1->word.first<<endl;
-                               cout<< p1->word.first<<" deleted"<<endl;
-                               delete p1;
-                               }
-                               else if(p1->left && !(p1->right)) {
-                                   if(R) {
-                                       Node *p3 = p1->right;
-                                       p3->parent = 0;
-                                       cout<<root->word.first<<" deleted"<<endl;
-                                       //cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
-                                       delete root;
-                                       root = p3;
-                                       return;
-                                       //return true;               //check this
-                                }
-                                if(b) { 
-                                    p2->right = p1->left;
-                                    }
-                                    else { 
-                                        p2->left = p1->left;
-                                        }
-                                        p1->left->parent = p1->parent;
-                                        cout<< p1->word.first<<" deleted"<<endl; //Maybeeeee
-                                        delete p1;
-                                        }
-                                        else if(!(p1->left) && p1->right) { 
-                                            if(R) { 
-                                                Node *p3 = p1->right;
-                                                p3->parent = 0;
-                                                cout<< root->word.first<<" deleted"<<endl;
-                                                //cout<<root->word.first<<" deleted, new count = "<<root->word.second<<endl;
-                                                delete root;
-                                                root = p3;
-                                                return;
-                                                //return true;             //check this
-                                                }
-                                                if(b) { 
-                                                    p2->right = p1->right;
-                                                    }
-                                                    else {
-                                                        p2->left = p1->right;
-                                                        }
-                                                        p1->right->parent = p1->parent;
-                                                        cout<< p1->word.first<<" deleted"<<endl;
-                                                        delete p1;
-                                                        }
-                                                        else {
-                                                            Node *p3 = getSuccessorNode(name);
-                                                            string temp = p3->word.first;
-                                                            //cout<<"I amd deleting this "<<temp<<endl;
-                                                            bstDelete(temp);
-                                                            p1->word.first = temp;
-                                                            }
-                                                            return;
-                                                            //return true;               //check this
-                                                            }
-                                                            return;
-                                                            //return false;               //check this
-                                                            }*/

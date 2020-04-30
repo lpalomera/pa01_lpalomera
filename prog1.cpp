@@ -30,7 +30,6 @@ int main(int argc, char *argv[]){
             }
     }
     myfile.close();
- //h1.hashSearch("broadcasting");
 
  string parse = argv[1];
  vector<string> phrase;
@@ -43,30 +42,25 @@ int main(int argc, char *argv[]){
  for (it; it != parse.end()+1; it++) {
    
    if(statement==true){
-    //cout<<"are you even in here "<<endl; 
      if (phrase[0]=="range"){
-       //cout<<phrase[2]<<" and "<<phrase[4]<<end;
        h1.hashRangeSearch(phrase[2],phrase[4]);
        b1.bstRangeSearch(phrase[2],phrase[4]);
        phrase.erase (phrase.begin(), phrase.begin()+ phrase.size());
        statement=false;
        }
      else if(phrase[0]=="delete"){
-       //cout<<"deleting "<<phrase[1]<<endl;
        h1.hashDelete(phrase[1]);
        b1.bstDelete(phrase[1]);
        phrase.erase (phrase.begin(), phrase.begin()+ phrase.size());
        statement=false;
        }
      else if(phrase[0]=="insert"){
-       //cout<<"inserting "<<phrase[1]<<endl;
        h1.hashInsert(phrase[1]);
        b1.bstInsert(phrase[1]);
        phrase.erase (phrase.begin(), phrase.begin()+ phrase.size());
        statement=false;
        }
      else if(phrase[0]=="search"){
-       //cout<<"searching "<<endl;//<<phrase[1]<<endl;
        h1.hashSearch(phrase[1]);
        b1.bstSearch(phrase[1]);
        phrase.erase (phrase.begin(), phrase.begin()+ phrase.size());
@@ -76,7 +70,6 @@ int main(int argc, char *argv[]){
      }
   
   if(*it==' ' || *it==',' || it==parse.end() ){ //if it has reached a space or comma,
-    //cout<<word<<endl;
     if(word!=" " && word!=""){
     x=word;
     phrase.push_back(x); //pushback the word and reset word
@@ -108,56 +101,5 @@ int main(int argc, char *argv[]){
       b1.bstSearch(phrase[1]);
       }
 
-/*
-string parse = argv[1] ;
-string::iterator it = parse.begin();
-string name, n;
-vector<string> dict;
-for (it; it != parse.end(); it++) {
-    if (name.length() > 5)
-        n = name.substr(name.length() - 4, 4);
-        if (name == "search" || name == "delete" || name == "insert" || name == "range search") {
-            dict.push_back(name);
-            name.clear();
-            }
-            else {
-                if(*it == ',') {
-                    dict.push_back(name);
-                    name.clear();
-                    it++;
-                    }
-                    else if (n == " to ") {
-                        name = name.substr(0, name.length() - 4);
-                        dict.push_back(name);
-                        name.clear();
-                        n.clear();
-                        name += *it;
-                        }
-                        else
-                            name += *it;
-                            }
-             }
-                            dict.push_back(name);
-                            for (int vecIt = 0; vecIt < dict.size(); vecIt++) {
-                                if (dict[vecIt] == "range search") {
-                                    h1.hashRangeSearch(dict[vecIt + 1], dict[vecIt + 2]);
-                                    b1.bstRangeSearch(dict[vecIt + 1], dict[vecIt + 2] );
-                                    }
-                                    else if (dict[vecIt] == "delete") {
-                                        h1.hashDelete(dict[vecIt + 1]);
-                                        b1.bstDelete(dict[vecIt + 1]);
-                                        }
-                                        else if (dict[vecIt] == "insert") {
-                                            h1.hashInsert(dict[vecIt + 1]);
-                                            b1.bstInsert(dict[vecIt + 1]);
-                                            }
-                                            else if (dict[vecIt] == "search") {
-                                                h1.hashSearch(dict[vecIt + 1]);
-                                                b1.bstSearch(dict[vecIt + 1]);
-                                            }
-                              }
-                                                
-
-*/
 return 0;
     }
